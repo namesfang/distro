@@ -1,0 +1,51 @@
+{
+	"name": "distro",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"pm2:start": "pm2 start ./pm2.config.cjs",
+		"pm2:stop": "pm2 stop distro",
+		"pm2:reload": "pm2 reload distro",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"format": "prettier --write .",
+		"lint": "prettier --check . && eslint .",
+		"migrate": "npx prisma migrate dev --name init",
+		"seed": "npx prisma db seed",
+		"studio": "npx prisma studio"
+	},
+	"prisma": {
+		"seed": "tsx ./prisma/seeds/index.ts"
+	},
+	"devDependencies": {
+		"@eslint/compat": "^1.2.5",
+		"@eslint/js": "^9.18.0",
+		"@sveltejs/adapter-node": "^5.2.12",
+		"@sveltejs/kit": "^2.16.0",
+		"@sveltejs/vite-plugin-svelte": "^5.0.0",
+		"@types/node": "^22.14.1",
+		"eslint": "^9.18.0",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-svelte": "^3.0.0",
+		"globals": "^16.0.0",
+		"prettier": "^3.4.2",
+		"prettier-plugin-svelte": "^3.3.3",
+		"prisma": "^6.6.0",
+		"sass": "^1.87.0",
+		"svelte": "^5.0.0",
+		"svelte-check": "^4.0.0",
+		"tsx": "^4.19.3",
+		"typescript": "^5.8.3",
+		"typescript-eslint": "^8.20.0",
+		"vite": "^6.2.5"
+	},
+	"dependencies": {
+		"@prisma/client": "^6.6.0",
+		"radash": "^12.1.0"
+	}
+}

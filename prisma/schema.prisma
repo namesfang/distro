@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// 管理员
+model User {
+  id     Int    @id @default(autoincrement())
+  name   String
+  phrase String
+}
+
+// 软件包标签
+model Tag {
+  id       Int     @id @default(autoincrement())
+  icon     String
+  href     String
+  label    String
+  disabled Boolean
+
+  bundles Bundle[]
+}
+
+// 芯片架构
+model Chip {
+  id       Int     @id @default(autoincrement())
+  name     String
+  disabled Boolean
+
+  bundles   ChipsAndBundles[]
+  downloads Download[]
+}
+
+// 安装包格式
+model Format {
+  id       Int     @id @default(autoincrement())
+  name     String
+  disabled Boolean
+
+  bundles   FormatsAndBundles[]
+  downloads Download[]
+}
+
+// 软件包
+model Bundle {
+  id        Int      @id @default(autoincrement())
+  // 所属标签
+  tagId     Int
+  // 英文名称
+  enName    String
+  // 中文名称
+  cnName    String
+  // 应用图标网址
+  iconUrl   String
+  // 软件主页网址
+  entryUrl  String
+  // 下载页面网址
+  pageUrl   String
+  // 描述
+  content   String
+  // 创建时间
+  createdAt DateTime
+  // 更新时间
+  updatedAt DateTime
+
+  Tag Tag @relation(fields: [tagId], references: [id])
+
+  chips   ChipsAndBundles[]
+  formats FormatsAndBundles[]
+
+  downloads Download[]
+}
+
+model ChipsAndBundles {
+  chipId   Int
+  bundleId Int
+
+  chip   Chip   @relation(fields: [chipId], references: [id])
+  bundle Bundle @relation(fields: [bundleId], references: [id])
+
+  @@id([chipId, bundleId])
+}
+
+model FormatsAndBundles {
+  formatId Int
+  bundleId Int
+
+  format Format @relation(fields: [formatId], references: [id])
+  bundle Bundle @relation(fields: [bundleId], references: [id])
+
+  @@id([formatId, bundleId])
+}
+
+model Download {
+  bundleId    Int
+  formatId    Int
+  chipId      Int
+  // 下载地址
+  url         String
+  // 软件大小
+  size        Decimal
+  // 软件版本名称
+  versionName String
+  // 软件版本号
+  versionCode String
+  // 免费 开源 收费 广告
+  tags        String
+
+  chip   Chip   @relation(fields: [chipId], references: [id])
+  format Format @relation(fields: [formatId], references: [id])
+  bundle Bundle @relation(fields: [bundleId], references: [id])
+
+  @@id([chipId, formatId, bundleId])
+}

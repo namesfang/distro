@@ -1,0 +1,54 @@
+:root {
+  --background-color: #f1f3f5;
+  --hover-background-color: #d4dbe2;
+  --success-color: #27c76f;
+  --danger-color: #f63c67;
+  --warning-color: #f6da3c;
+  --info-color: #27c76f;
+  --primary-color: #1083fe;
+  --hover-primary-color: #0d74e2;
+  --text-color: #42576c;
+  --text-2-color: #768390;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e0e2eb;
+  border-radius: 3px
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c6c4ff!important
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(224,226,235,0);
+  border-radius: 0
+}
