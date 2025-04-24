@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Icon from "$components/icons/icon.svelte";
-	import Provider from "$components/ui/provider.svelte";
   
   let { children, data } = $props()
 
@@ -20,27 +19,25 @@
 	</script>
 </svelte:head>
 
-<Provider>
-	<div class={className}>
-		<aside>
-			{#each data.multi as items}
-				<nav>
-					{#each items as {active, href, icon, label, target}}
-						<a href={href} class:active={active} {target}>
-							<i>
-								<Icon name={icon}/>
-							</i>
-							<em>{label}</em>
-						</a>
-					{/each}
-				</nav>
-			{/each}
-		</aside>
-		<main>
-			{@render children()}
-		</main>
-	</div>
-</Provider>
+<div class={className}>
+	<aside>
+		{#each data.multi as items}
+			<nav>
+				{#each items as {active, href, icon, label, target}}
+					<a href={href} class:active={active} {target}>
+						<i>
+							<Icon name={icon}/>
+						</i>
+						<em>{label}</em>
+					</a>
+				{/each}
+			</nav>
+		{/each}
+	</aside>
+	<main>
+		{@render children()}
+	</main>
+</div>
 
 
 <style lang="scss">
